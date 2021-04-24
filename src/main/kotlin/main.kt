@@ -5,6 +5,12 @@ import javax.imageio.ImageIO
 import kotlin.system.exitProcess
 import kotlin.math.roundToInt
 
+class ResourceLoader {
+    fun getResource(filePath: String): URL {
+        return ResourceLoader::class.java
+            .getResource(filePath)!!
+    }
+}
 fun newX(width: Int, lastX: Int): Int {
     var result = (Math.random() * width - width / 2)
         .roundToInt()
@@ -45,10 +51,9 @@ fun main() {
     var lastX = -1 // increase "randomization" by preventing same coordinate twice in a row
     var lastY = -1
     val frame = JFrame("Score: $score") // needs to be here so score is defined
+    val resourceLoader = ResourceLoader()
 
-    val moleIMGPath = URL("https://cdn.discordapp.com/attachments/817931493909200909/835568279522902026/unknown.png")
-
-    val moleIMG = ImageIO.read(moleIMGPath)
+    val moleIMG = ImageIO.read(resourceLoader.getResource("mole.png"))
         .getScaledInstance(width / 16, height / 16, 0)
     val mole = JButton(ImageIcon(moleIMG))
     val exitBtn = JButton("Exit")
