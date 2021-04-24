@@ -1,5 +1,6 @@
 import java.awt.Dimension
 import java.io.File
+import java.net.URL
 import javax.swing.*
 import javax.imageio.ImageIO
 import kotlin.system.exitProcess
@@ -34,28 +35,21 @@ fun newY(height: Int, lastY: Int): Int {
     return result
 }
 
-fun rootDir(file: String = ""): String {
-    return System.getProperty("user.dir") + "/$file"
-}
-
-fun currDir(file: String = ""): String {
-    return rootDir() + "/src/main/kotlin/$file"
-}
-
 fun main() {
     // setting top bar thingy in mac os to the game name
     System.setProperty("apple.awt.application.name", "Mole Mash")
 
+    // important vars
     val height = 640
     val width = 640
     var score = 0
-
     var lastX = -1 // increase "randomization" by preventing same coordinate twice in a row
     var lastY = -1
-
     val frame = JFrame("Score: $score") // needs to be here so score is defined
 
-    val moleIMG = ImageIO.read(File(currDir("mole.png")))
+    val moleIMGPath = URL("https://cdn.discordapp.com/attachments/817931493909200909/835568279522902026/unknown.png")
+
+    val moleIMG = ImageIO.read(moleIMGPath)
         .getScaledInstance(width / 16, height / 16, 0)
     val mole = JButton(ImageIcon(moleIMG))
     val exitBtn = JButton("Exit")
