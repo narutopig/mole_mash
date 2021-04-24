@@ -1,5 +1,4 @@
 import java.awt.Dimension
-import java.io.File
 import java.net.URL
 import javax.swing.*
 import javax.imageio.ImageIO
